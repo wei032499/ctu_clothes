@@ -1,0 +1,249 @@
+CREATE TABLE `clothes`.`customer` (
+`Cust_Num` VARCHAR(12) NOT NULL COMMENT '顧客編號(C+西元年+月份+流水號5碼)',
+`Cust_Name` TEXT NOT NULL COMMENT '顧客姓名',
+`Cust_Birth` DATE NOT NULL COMMENT '出生日期',
+`Cust_Postal` VARCHAR(5) NOT NULL COMMENT '郵遞區號',
+`Cust_Addr` TEXT NOT NULL COMMENT '住址',
+`Cust_Tel` TEXT NOT NULL COMMENT '電話(包括家用電話及手機)',
+`Cust_Mobile` TEXT NOT NULL COMMENT '手機',
+`Cust_Email` TEXT NOT NULL COMMENT 'Email',
+`Cust_Memo` TEXT NOT NULL COMMENT '特殊備註',
+`Bran_num` TEXT NOT NULL COMMENT '建檔分店',
+`Adduser` TEXT NOT NULL COMMENT '建檔人員',
+`Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+`Chguser` TEXT NOT NULL COMMENT '最後修改人員',
+`Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+PRIMARY KEY (`Cust_Num`)
+) ENGINE = InnoDB;
+ ---
+CREATE TABLE `clothes`.`customerorder` (
+`Order_Custom` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '訂製品編號',
+ PRIMARY KEY (`Order_Custom`),
+`Order_Num` INT UNSIGNED NOT NULL COMMENT '訂單編號',
+`Order_Date` DATE NOT NULL COMMENT '訂購日期',
+`Order_Mate` TEXT NOT NULL COMMENT '材質/配色(多種組合)',
+ `Order_Style` TEXT NOT NULL COMMENT '塑身效果',
+ `Order_Unit_Price` INT UNSIGNED NOT NULL COMMENT '單價',
+ `Order_Amount` INT UNSIGNED NOT NULL COMMENT '數量',
+ `Order_Deldate` DATE NOT NULL COMMENT '交貨日期',
+ `Order_Subtotal` INT UNSIGNED NOT NULL COMMENT '小計'
+) ENGINE = InnoDB;
+ ---
+CREATE TABLE `clothes`.`customizeddemand` (
+ `Order_Num` INT UNSIGNED NOT NULL COMMENT '訂單編號',
+ `Order_Custom` INT UNSIGNED NOT NULL COMMENT '訂製品編號',
+ `CustomD_Bside` TINYINT UNSIGNED NOT NULL COMMENT '乳側(1.要包; 0.不包)',
+ `CustomD_Breast` TINYINT UNSIGNED NOT NULL COMMENT '乳房(1.大深, 0.小貼, 標準)',
+ `CustomD_Spon` TINYINT UNSIGNED NOT NULL COMMENT '海棉(1.需要, 0.不需要)',
+ `CustomD_Cup` TINYINT UNSIGNED NOT NULL COMMENT '罩杯形狀(1.全罩, 0.3/4罩)', 
+ `CustomD_Pocket` TINYINT UNSIGNED NOT NULL COMMENT '口袋(1.需要, 0.不需要)', 
+ `CustomD_Strap` TINYINT UNSIGNED NOT NULL COMMENT '肩帶(1.寬, 0.細)', 
+ `CustomD_Wear` TINYINT UNSIGNED NOT NULL COMMENT '穿著喜好(1.側邊排扣, 0.置中拉鍊)', 
+ `CustomD_Others` TEXT NOT NULL COMMENT '材質/配色(其他需求)' 
+) ENGINE = InnoDB;
+ ---
+ CREATE TABLE `clothes`.`custmeasure` (
+ `Cust_Num` VARCHAR(12) NOT NULL COMMENT '顧客編號(C+西元年+月份+流水號5碼)',
+ `BodyM_Date` DATETIME NOT NULL COMMENT '量身日期',
+ `Emp_Num` VARCHAR(10) NOT NULL COMMENT '量身人員',
+ `BodyM_SW` FLOAT UNSIGNED NOT NULL COMMENT '肩寛',
+ `BodyM_DFS` FLOAT UNSIGNED NOT NULL COMMENT '前胸吊帶距',
+ `BodyM_BH` FLOAT UNSIGNED NOT NULL COMMENT '乳高',
+ `BodyM_BR` FLOAT UNSIGNED NOT NULL COMMENT '乳深',
+ `BodyM_SBW` FLOAT UNSIGNED NOT NULL COMMENT '單乳寬',
+ `BodyM_FBW` FLOAT UNSIGNED NOT NULL COMMENT '前胸寬',
+ `BodyM_UpB` FLOAT UNSIGNED NOT NULL COMMENT '胸上圍',
+ `BodyM_B` FLOAT UNSIGNED NOT NULL COMMENT '胸圍',
+ `BodyM_UdB` FLOAT UNSIGNED NOT NULL COMMENT '胸下圍',
+ `BodyM_ArtoUdB` FLOAT UNSIGNED NOT NULL COMMENT '腋下->胸下',
+ `BodyM_ArtoW` FLOAT UNSIGNED NOT NULL COMMENT '腋下->腰',
+ `BodyM_ArtoT` FLOAT UNSIGNED NOT NULL COMMENT '腋下->大腿',
+ `BodyM_UdBtoW` FLOAT UNSIGNED NOT NULL COMMENT '胸下->腰',
+ `BodyM_UdBtoT` FLOAT UNSIGNED NOT NULL COMMENT '胸下->大腿',
+ `BodyM_W` FLOAT UNSIGNED NOT NULL COMMENT '腰圍',
+ `BodyM_AbH` FLOAT UNSIGNED NOT NULL COMMENT '腹高',
+ `BodyM_Ab` FLOAT UNSIGNED NOT NULL COMMENT '腹圍',
+ `BodyM_UdBtoY` FLOAT UNSIGNED NOT NULL COMMENT '胸下->Y',
+ `BodyM_Hip` FLOAT UNSIGNED NOT NULL COMMENT '臀圍',
+ `BodyM_HL` FLOAT UNSIGNED NOT NULL COMMENT '臀長',
+ `BodyM_WtoT` FLOAT UNSIGNED NOT NULL COMMENT '平口側邊長',
+ `BodyM_OTS` FLOAT UNSIGNED NOT NULL COMMENT '斜大腿圍',
+ `BodyM_BL` FLOAT UNSIGNED NOT NULL COMMENT '背長',
+ `BodyM_BW` FLOAT UNSIGNED NOT NULL COMMENT '背寬',
+ `BodyM_CD` FLOAT UNSIGNED NOT NULL COMMENT '股上長',
+ `BodyM_HLH` FLOAT UNSIGNED NOT NULL COMMENT '提臀高',
+ `BodyM_BHLH` FLOAT UNSIGNED NOT NULL COMMENT '四角提臀高',
+ `BodyM_CL` FLOAT UNSIGNED NOT NULL COMMENT '褲檔長',
+ `BodyM_UdBtoC` FLOAT UNSIGNED NOT NULL COMMENT '總檔長',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ PRIMARY KEY (`Cust_Num`,`BodyM_Date`)
+ ) ENGINE = InnoDB;
+ ---
+ CREATE TABLE `clothes`.`inventory` (
+ `Inven_Num` INT UNSIGNED NOT NULL COMMENT '進貨單號',
+ `Inven_date` DATE NOT NULL COMMENT '進貨日期',
+ `Mate_Num` INT UNSIGNED NOT NULL COMMENT '用料編號',
+ `Inven_UnitPrice` FLOAT UNSIGNED NOT NULL COMMENT '進貨單價', 
+ `Inven_Amount` INT UNSIGNED NOT NULL COMMENT '進貨數量', 
+ `Inven_TotalPrice` INT UNSIGNED NOT NULL COMMENT '總額', 
+ `Inven_Product` FLOAT UNSIGNED NOT NULL COMMENT '可製數量(Inven_Amount / Mate_UnitPieces)',
+ `Inven_rest` FLOAT UNSIGNED NOT NULL COMMENT '剩餘件數' 
+ ) ENGINE = InnoDB;
+ ---SELECT * FROM `inventory` JOIN `material` ON `inventory`.`Mate_Num` = `material`.`Mate_Num`;
+ CREATE TABLE `clothes`.`material` (
+ `Mate_Num` VARCHAR(12) NOT NULL COMMENT '用料編號',
+ `Mate_Name` TEXT NOT NULL COMMENT '用料名稱',
+ `CT_No` VARCHAR(3) NOT NULL COMMENT '用料大類',
+ `CI_No` VARCHAR(3) NOT NULL COMMENT '用料小類',
+ `Mate_Color` VARCHAR(3) NOT NULL COMMENT '顏色',
+ `Safe_Qty` INT UNSIGNED NOT NULL COMMENT '安全存量',
+ `Mate_Unit` VARCHAR(3) NOT NULL COMMENT '單位',
+ `Supply_Num` VARCHAR(10) NOT NULL COMMENT '預設供應商',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ PRIMARY KEY (`Mate_Num`)
+ ) ENGINE = InnoDB;
+ ---
+ CREATE TABLE `clothes`.`supply` (
+ `Supply_Num` VARCHAR(10) NOT NULL COMMENT '供應商編號，SYYYYMM999(S+西元年+月份+流水號3碼)',
+ `Supply_Name` TEXT NOT NULL COMMENT '供應商名稱',
+ `Supply_Adrs` TEXT NOT NULL COMMENT '住址', 
+ `Supply_Tel` TEXT NOT NULL COMMENT '市話(市話#分機)',
+ `Supply_Mobi` TEXT NOT NULL COMMENT '手機',
+ `Supply_Respon` TEXT NOT NULL COMMENT '負責人員',
+ `Cate` VARCHAR(3) NOT NULL COMMENT '供應商類別(SysCodeInfo.CI_NO; NO=B09)',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ PRIMARY KEY (`Supply_Num`)
+ ) ENGINE = InnoDB;
+ ---
+ CREATE TABLE `clothes`.`purchase` (
+ `Pur_Num` VARCHAR(10) NOT NULL COMMENT '進貨單號，PYYYYMM999(P+西元年+月份+流水號3碼)',
+ `Pur_Date` DATE NOT NULL COMMENT '進貨日期',
+ `Mate_Num` VARCHAR(12) NOT NULL COMMENT '用料代碼', 
+ `Supply_Num` VARCHAR(10) NOT NULL COMMENT '供應商代碼',
+ `Pur_Price` INT UNSIGNED NOT NULL COMMENT '單價',
+ `Pur_Qty` INT UNSIGNED NOT NULL COMMENT '進貨數量',
+ `Pur_Unit` VARCHAR(3) NOT NULL COMMENT '進貨單位(ct_no=B08)',
+ `Pur_Amt` INT UNSIGNED NOT NULL COMMENT '總計金額',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ PRIMARY KEY (`Pur_Num`)
+ ) ENGINE = InnoDB;
+  ---
+ CREATE TABLE `clothes`.`department` (
+  `Dep_Num` INT UNSIGNED NOT NULL COMMENT '部門編號',
+ `Dep_Name` TEXT NOT NULL COMMENT '部門名稱'
+ ) ENGINE = InnoDB;
+   ---
+ CREATE TABLE `clothes`.`employee` (
+  `Emp_Num` VARCHAR(10) NOT NULL COMMENT '員工編號',
+ `Emp_Name` TEXT NOT NULL COMMENT '員工姓名',
+ `Emp_ID` TEXT NOT NULL COMMENT '身份證字號',
+ `Emp_Addr` TEXT NOT NULL COMMENT '住址',
+ `Emp_Tel` TEXT NOT NULL COMMENT '住家電話',
+ `Emp_Mobile` TEXT NOT NULL COMMENT '手機',
+ `Emp_Start` DATE NOT NULL COMMENT '到職日',
+ `Emp_Invalid` DATE NOT NULL COMMENT '權限失效日',
+ `Emp_level` TEXT NOT NULL COMMENT '薪級',
+ `Dep_Num` TEXT NOT NULL COMMENT '所屬部門',
+ `Bran_Num` VARCHAR(4) NOT NULL COMMENT '上班分店',
+ `Emp_PSW` TEXT NOT NULL COMMENT '密碼',
+ `Emp_Role` TEXT NOT NULL COMMENT '角色',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ `error_time` TINYINT UNSIGNED NOT NULL,
+ PRIMARY KEY (`Emp_Num`)
+ ) ENGINE = InnoDB;
+ ---
+ CREATE TABLE `clothes`.`branch` (
+ `Bran_Num` VARCHAR(4) NOT NULL COMMENT '分店編號',
+ `Bran_Name` TEXT NOT NULL COMMENT '分店名稱',
+ `Bran_Start` DATE NOT NULL COMMENT '設立日期',
+ `Bran_Addr` TEXT NOT NULL COMMENT '地址',
+ `Bran_Tel` TEXT NOT NULL COMMENT '電話',
+ `Bran_Supr` VARCHAR(10) NOT NULL COMMENT '店長',
+ `Bran_Depo` INT UNSIGNED NOT NULL COMMENT '押金',
+ `Bran_Rent` INT UNSIGNED NOT NULL COMMENT '租金',
+ `Bran_Deco` INT UNSIGNED NOT NULL COMMENT '裝潢費',
+ `Bran_Util` INT UNSIGNED NOT NULL COMMENT '水電費',
+ `Bran_extras` INT UNSIGNED NOT NULL COMMENT '雜支',
+ `Adduser` VARCHAR(10) NOT NULL COMMENT '建檔人員',
+ `Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+ `Chguser` VARCHAR(10) NOT NULL COMMENT '最後修改人員',
+ `Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+ PRIMARY KEY (`Bran_Num`)
+ ) ENGINE = InnoDB;
+
+--add `Inven_Amount` to `Mate_rest`
+--可製數量(Mate_rest / Mate_SingPieces)
+
+
+CREATE TABLE `clothes`.`SysCodeType` (
+`CT_No` VARCHAR(3) NOT NULL COMMENT '代碼類別碼',
+`CT_Name` TEXT NOT NULL COMMENT '代碼類別說明',
+`Adduser` TEXT NOT NULL COMMENT '建檔人員',
+`Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+`Chguser` TEXT NOT NULL COMMENT '最後修改人員',
+`Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+PRIMARY KEY (CT_No)
+) ENGINE = InnoDB;
+
+CREATE TABLE `clothes`.`SysCodeInfo` (
+`CT_No` VARCHAR(3) NOT NULL COMMENT '代碼類別碼',
+`CI_No` VARCHAR(3) NOT NULL COMMENT '系統代碼',
+`CI_Name` TEXT NOT NULL COMMENT '系統代碼說明',
+`Adduser` TEXT NOT NULL COMMENT '建檔人員',
+`Addtime` DATETIME NOT NULL COMMENT '建檔時間',
+`Chguser` TEXT NOT NULL COMMENT '最後修改人員',
+`Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+PRIMARY KEY (CT_No, CI_No)
+) ENGINE = InnoDB;
+ALTER TABLE SysCodeInfo ADD PRIMARY KEY (CT_No, CI_No);
+
+CREATE TABLE `clothes`.`SysOpLog` (
+`sl_id` INT UNSIGNED NOT NULL COMMENT '自動編碼' AUTO_INCREMENT,
+`func_no` VARCHAR(3) NOT NULL COMMENT '功能畫面',
+`op_no` VARCHAR(3) NOT NULL COMMENT '系統代碼說明',
+`op_key` TEXT NOT NULL COMMENT '關鍵值',
+`Op_Msg` TEXT NOT NULL COMMENT '訊息',
+`Adduser` TEXT NOT NULL COMMENT '操作人員',
+`Addtime` DATETIME NOT NULL COMMENT '操作時間',
+`Chguser` TEXT NOT NULL COMMENT '最後修改人員',
+`Chgtime` DATETIME NOT NULL COMMENT '最後修改時間',
+PRIMARY KEY (sl_id)
+) ENGINE = InnoDB;
+
+CREATE TABLE `sysoprole` (
+  `Or_No` varchar(3) NOT NULL COMMENT '角色代碼',
+  `Or_Name` text NOT NULL COMMENT '角色名稱',
+  `Or_Type` varchar(3) NOT NULL COMMENT '角色類別',
+  `Adduser` text NOT NULL COMMENT '建檔人員',
+  `Addtime` datetime NOT NULL COMMENT '建檔時間',
+  `Chguser` text NOT NULL COMMENT '最後修改人員',
+  `Chgtime` datetime NOT NULL COMMENT '最後修改時間',
+  PRIMARY KEY (`Or_No`)
+) ENGINE=InnoDB;
+
+CREATE TABLE `sysoprolefunc` (
+  `Or_No` varchar(3) NOT NULL COMMENT '角色代碼',
+  `bran_num` varchar(4) NOT NULL COMMENT '可維護門店',
+  `func_no` varchar(3) NOT NULL COMMENT '功能代碼',
+  `Func_Right` varchar(3) NOT NULL COMMENT '功能權限',
+  `Adduser` text NOT NULL COMMENT '建檔人員',
+  `Addtime` datetime NOT NULL COMMENT '建檔時間',
+  `Chguser` text NOT NULL COMMENT '最後修改人員',
+  `Chgtime` datetime NOT NULL COMMENT '最後修改時間',
+  PRIMARY KEY (`Or_No`,`bran_num`,`func_no`)
+) ENGINE=InnoDB;
