@@ -169,7 +169,11 @@ if ($permission < 1) {
                         "data": "Order_Num"
                     },
                     {
-                        "data": "Cust_Name"
+                        "render": function(data, type, row, meta) {
+                            if (row.Cust_Name === null)
+                                return row.Cust_Num;
+                            return row.Cust_Name;
+                        }
                     },
                     {
                         "data": "Order_Date"

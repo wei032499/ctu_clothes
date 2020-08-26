@@ -238,7 +238,7 @@ if (isset($_GET['id'])) // 修改
                             </div>
                             <div class="form-group row">
                                 <label for="Cust_Memo" class=" col-form-label">備註</label>
-                                <textarea class="form-control" name="Cust_Memo" required></textarea>
+                                <textarea class="form-control" name="Cust_Memo"></textarea>
                             </div>
                         </div>
                     </div>

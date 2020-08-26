@@ -774,7 +774,7 @@ if (isset($_GET['id'])) // 修改
                                             $("#materialTable input[name='WU_Qty[]']").eq(index).val(obj.WU_Qty).change();
                                             $("#materialTable select[name='Mate_Unit[]']").eq(index).val(obj.Mate_Unit).change();
                                             $("#materialTable input[name='WU_Unit[]']").eq(index).val(obj.WU_Unit).change();
-                                            $("#materialTable select[name='Mate_Name[]']").eq(index).empty().append($("<option selected></option>").attr("value", json['data'][0].Mate_Num).text(json['data'][0].Mate_Name)).change();
+                                            $("#materialTable select[name='Mate_Name[]']").eq(index).empty().append($("<option selected></option>").attr("value", obj.Mate_Num).text(obj.Mate_Name)).change();
 
                                             index += 1;
                                         });
