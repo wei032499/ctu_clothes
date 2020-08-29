@@ -66,7 +66,7 @@ if (isset($_GET['id'])) // 修改
                     <div class="row" style="margin:5px auto">
                         <div class="col-sm row" style="text-align: center;margin:auto">
                             <div style="align-self: center;margin:5px 0px;white-space:nowrap">分店編號：</div>
-                            <input placeholder="XXXX" type="text" class="form-control col-sm" style="align-self: center;margin:5px auto;min-width:100px" name="Bran_Num" required>
+                            <input placeholder="大寫字母&數字(共4碼)" type="text" pattern="[\d|A-Z]+" maxlength="4" class="form-control col-sm" style="align-self: center;margin:5px auto;min-width:100px" name="Bran_Num" required>
                         </div>
                         <div class="col-sm row" style="text-align: center;margin:auto">
                             <div style="align-self: center;margin:5px 0px;white-space:nowrap">分店名稱：</div>
@@ -84,7 +84,7 @@ if (isset($_GET['id'])) // 修改
                         </div>
                         <div class="col-sm-4 row" style="text-align: center;margin:auto">
                             <div style="align-self: center;margin:5px 0px;white-space:nowrap">電&emsp;話：</div>
-                            <input type="tel" class="form-control col-sm" style="align-self: center;margin:5px auto;;min-width:100px" name="Bran_Tel" required>
+                            <input type="tel" pattern="[\d|-]+" class="form-control col-sm" style="align-self: center;margin:5px auto;;min-width:100px" name="Bran_Tel" required>
                         </div>
                     </div>
                     <div class="row" style="margin:10px auto">
