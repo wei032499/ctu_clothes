@@ -2262,7 +2262,9 @@ try {
                 } else if ($data['form'] == "customer") {
 
                     if (checkPermission(null, 'A02') >= 4) {
-                        $sql = "SELECT * FROM customer WHERE Cust_Num = ?";
+                        $sql = "SELECT A.*,B.OrderCancel FROM customer A
+                        LEFT OUTER JOIN `custorder` B ON (A.Cust_Num = B.Cust_Num)
+                         WHERE A.Cust_Num = ?";
                         $paramList = array();
                         $paramList[] =  $data['id'];
                         $stmt = $conn->prepare($sql);
@@ -2272,6 +2274,9 @@ try {
                         $SQLresult = $stmt->get_result();
                         $row = $SQLresult->fetch_assoc();
                         $stmt->close();
+
+                        if ($row['OrderCancel'] === '0')
+                            throw new Exception("此顧客資料使用中");
 
                         $PKs[] = $row['Cust_Num'];
                         $PKs[] = $row['Cust_Name'];
@@ -2306,10 +2311,11 @@ try {
                     if (checkPermission(null, 'A03') >= 4) {
                         $conn->query("LOCK TABLES `custorder`,`custmeasure` WRITE");
 
-                        $sql = "SELECT A.*,B.Cust_Name,C.Emp_Name, F.Bran_Name FROM custmeasure A 
+                        $sql = "SELECT A.*,B.Cust_Name,C.Emp_Name, F.Bran_Name,G.OrderCancel FROM custmeasure A 
                                 LEFT OUTER JOIN customer B ON (A.Cust_Num = B.Cust_Num)
                                 LEFT OUTER JOIN employee C ON (A.Emp_Num = C.Emp_Num)
                                 LEFT OUTER JOIN branch F ON (A.Bran_Num = F.Bran_Num )
+                                LEFT OUTER JOIN custorder G ON (A.Cust_Num = G.Cust_Num AND A.BodyM_Date = G.BodyM_Date)
                                 WHERE A.Cust_Num = ? AND A.BodyM_Date = ?";
                         $paramList = array();
                         $paramList[] =  $data['Cust_Num'];
@@ -2321,6 +2327,9 @@ try {
                         $SQLresult = $stmt->get_result();
                         $row = $SQLresult->fetch_assoc();
                         $stmt->close();
+
+                        if ($row['OrderCancel'] === '0')
+                            throw new Exception("此量身資料使用中");
 
                         $PKs[] = $row['Cust_Num'];
                         $PKs[] = $row['Cust_Name'];

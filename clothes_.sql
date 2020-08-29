@@ -1237,8 +1237,7 @@ ALTER TABLE `branchexpenditure`
 -- 資料表的限制式 `custmeasure`
 --
 ALTER TABLE `custmeasure`
-  ADD CONSTRAINT `custmeasure_ibfk_1` FOREIGN KEY (`Unit_CT`,`BodyM_Unit`) REFERENCES `syscodeinfo` (`CT_No`, `CI_No`),
-  ADD CONSTRAINT `custmeasure_ibfk_2` FOREIGN KEY (`Cust_Num`) REFERENCES `customer` (`Cust_Num`);
+  ADD CONSTRAINT `custmeasure_ibfk_1` FOREIGN KEY (`Unit_CT`,`BodyM_Unit`) REFERENCES `syscodeinfo` (`CT_No`, `CI_No`);
 
 --
 -- 資料表的限制式 `custom`
