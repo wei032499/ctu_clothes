@@ -50,7 +50,7 @@ if ($permission < 1) {
     <section>
         <div class="container" style="margin: 10px auto">
             <div class="shadow p-3 mb-5 bg-white rounded" style="padding:2.5rem!important">
-                <h1>顧客訂單維護</h1>
+                <h1>派工用料維護</h1>
                 <hr />
                 <div class="border row" style="margin: 10px auto;padding:10px;overflow-x:hidden" id="searchBox">
                     <div class="" style="margin: auto;width: 100%;">
