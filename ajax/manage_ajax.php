@@ -1493,7 +1493,10 @@ try {
                     $paramList[] = $_POST['Emp_Tel'];
                     $paramList[] = $_POST['Emp_Mobile'];
                     $paramList[] = $_POST['Emp_Start'];
-                    $paramList[] = $_POST['Emp_Invalid'];
+                    if($_POST['Emp_Invalid']=="")
+                        $paramList[] = NULL;
+                    else
+                        $paramList[] = $_POST['Emp_Invalid'];
                     $paramList[] = $_POST['Emp_Level'];
                     $paramList[] = $_POST['Dep_Num'];
                     $paramList[] = $_POST['Bran_Num'];

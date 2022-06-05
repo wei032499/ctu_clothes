@@ -3,6 +3,13 @@
 @require_once($_SERVER["DOCUMENT_ROOT"] . "/clothes/ajax/DB.php");
 date_default_timezone_set("Asia/Taipei");
 
+function varDumpToString($var) {
+    ob_start();
+    var_dump($var);
+    $result = ob_get_clean();
+    return $result;
+ }
+
 function DynamicBindVariables($stmt, $params)
 {
     if ($params != null) {

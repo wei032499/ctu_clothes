@@ -14,7 +14,7 @@ if ($_POST['form'] == "account") {
     if ($stmt = $conn->prepare("SELECT A.`Emp_Num`,A.`Emp_Name`,A.`Bran_Num`,A.`Emp_PSW`,A.`Emp_Role`,B.`Bran_Name`,C.`Or_Name` FROM `employee` A
                                 LEFT OUTER JOIN `branch` B ON (A.Bran_Num = B.Bran_Num)
                                 LEFT OUTER JOIN `sysoprole` C ON (A.Emp_Role = C.Or_No)
-                                WHERE `Emp_Num`=? AND (A.Emp_Invalid>NOW() OR A.Emp_Invalid='0000-00-00') AND (A.Emp_Start<=NOW() OR A.Emp_Start='0000-00-00')")) {
+                                WHERE `Emp_Num`=? AND (A.Emp_Invalid>NOW() OR A.Emp_Invalid is NULL) AND (A.Emp_Start<=NOW() OR A.Emp_Start is NULL)")) {
         $_POST['password'] = hash('sha3-256', $_POST['password']);
         if (isset($_POST['account'])) {
             $stmt->bind_param("s", $_POST['account']);
